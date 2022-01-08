@@ -1,0 +1,36 @@
+{
+  "name": "create_ten",
+  "version": "1.0.0",
+  "description": "Create ten from four numbers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taka110-IT/create_ten.git"
+  },
+  "keywords": [
+    "create_ten"
+  ],
+  "author": "taka110 <create_ten@outlook.com> (https://enrichmylife.hatenablog.jp/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/taka110-IT/create_ten/issues"
+  },
+  "homepage": "https://github.com/taka110-IT/create_ten#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^25.3.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "jest": "^27.4.5",
+    "standard": "^16.0.4"
+  },
+  "dependencies": {
+    "enquirer": "^2.3.6"
+  }
+}
