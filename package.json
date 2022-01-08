@@ -1,12 +1,12 @@
 {
   "name": "create_ten",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create ten from four numbers.",
   "main": "index.js",
   "bin": {
     "create_ten": "./index.js"
   },
-    "scripts": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
