@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Create ten from four numbers.",
   "main": "index.js",
-  "scripts": {
-    "test": "jest"
+  "bin": {
+    "create_ten": "./index.js"
+  },
+    "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -27,7 +30,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-standard": "^5.0.0",
-    "jest": "^27.4.5",
     "standard": "^16.0.4"
   },
   "dependencies": {
