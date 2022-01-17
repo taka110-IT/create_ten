@@ -3,7 +3,7 @@
 const { Select } = require('enquirer')
 const operators = ['+', '-', '*', '/']
 
-class FourNumber {
+class FourNumbers {
   constructor (min, max) {
     const numbers = []
     for (let i = 0; i < 4; i++) {
@@ -21,9 +21,9 @@ class FourNumber {
 }
 
 class NumberSelector {
-  constructor (fourNumber, selectedNumbers) {
-    this.fourNumber = fourNumber
-    this.fourNumber.numbers.push('Impossible')
+  constructor (fourNumbers, selectedNumbers) {
+    this.fourNumbers = fourNumbers
+    this.fourNumbers.numbers.push('Impossible')
     this.selectedNumbers = selectedNumbers
   }
 
@@ -32,7 +32,7 @@ class NumberSelector {
     const prompt = new Select({
       name: 'numbers',
       message: () => { return `Select a number.  Time Remaining ${timeRemaining} ` },
-      choices: this.fourNumber.numbers
+      choices: this.fourNumbers.numbers
     })
 
     let interval
@@ -47,9 +47,9 @@ class NumberSelector {
     await prompt.run()
       .then(answer => {
         answer === 'Impossible' ? this.selectedNumbers.push(answer) : this.selectedNumbers.push(parseInt(answer))
-        this.fourNumber.numbers.splice(prompt.index, 1)
-        if (this.fourNumber.numbers.length === 2) {
-          this.selectedNumbers.push(parseInt(this.fourNumber.numbers[0].value))
+        this.fourNumbers.numbers.splice(prompt.index, 1)
+        if (this.fourNumbers.numbers.length === 2) {
+          this.selectedNumbers.push(parseInt(this.fourNumbers.numbers[0].value))
         }
       })
       .catch(() => {
@@ -72,9 +72,12 @@ class OperatorSelector {
       choices: operators
     })
 
-    await prompt.run()
-      .then(answer => this.selectedOperators.push(answer))
-      .catch(console.error)
+    try {
+      const operator = await prompt.run()
+      this.selectedOperators.push(operator)
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
@@ -121,14 +124,14 @@ class Judgment {
 
 class Main {
   constructor () {
-    const fourNumber = new FourNumber(1, 10)
-    this.fourNumber = fourNumber
+    const fourNumbers = new FourNumbers(1, 10)
+    this.fourNumbers = fourNumbers
   }
 
   async run () {
     const selectedNumbers = []
     const selectedOperators = []
-    const numberSelector = new NumberSelector(this.fourNumber, selectedNumbers)
+    const numberSelector = new NumberSelector(this.fourNumbers, selectedNumbers)
     const operatorSelector = new OperatorSelector(operators, selectedOperators)
     for (let i = 0; i < 3; i++) {
       await numberSelector.getNumber()
@@ -136,7 +139,7 @@ class Main {
       await operatorSelector.getOperator()
     }
     if (!(selectedNumbers.find(element => element === 'Impossible'))) {
-      console.log(`The remaining numbers ${this.fourNumber.numbers[0].value}.`)
+      console.log(`The remaining numbers ${this.fourNumbers.numbers[0].value}.`)
     }
     const calculation = new Calculation(selectedNumbers, selectedOperators)
     const total = calculation.total()
