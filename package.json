@@ -1,6 +1,6 @@
 {
   "name": "create_ten",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create ten from four numbers.",
   "main": "index.js",
   "bin": {
