@@ -44,18 +44,17 @@ class NumberSelector {
     })
     prompt.once('close', () => { clearInterval(interval) })
 
-    await prompt.run()
-      .then(answer => {
-        answer === 'Impossible' ? this.selectedNumbers.push(answer) : this.selectedNumbers.push(parseInt(answer))
-        this.fourNumbers.numbers.splice(prompt.index, 1)
-        if (this.fourNumbers.numbers.length === 2) {
-          this.selectedNumbers.push(parseInt(this.fourNumbers.numbers[0].value))
-        }
-      })
-      .catch(() => {
-        console.log('\nOh! Time out!')
-        this.selectedNumbers.push('Impossible')
-      })
+    try {
+      const number = await prompt.run()
+      number === 'Impossible' ? this.selectedNumbers.push(number) : this.selectedNumbers.push(parseInt(number))
+      this.fourNumbers.numbers.splice(prompt.index, 1)
+      if (this.fourNumbers.numbers.length === 2) {
+        this.selectedNumbers.push(parseInt(this.fourNumbers.numbers[0].value))
+      }
+    } catch {
+      console.log('\nOh! Time out!')
+      this.selectedNumbers.push('Impossible')
+    }
   }
 }
 
